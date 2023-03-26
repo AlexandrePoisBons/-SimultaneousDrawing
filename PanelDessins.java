@@ -3,6 +3,7 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.awt.Color;
 
 public class PanelDessins extends JPanel implements MouseListener , ActionListener
@@ -10,9 +11,11 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
 
     int baseX, baseY , newX , newY;
     JFrame frame;
-    public PanelDessins(JFrame frame)
+    Controleur c;
+    public PanelDessins(JFrame frame, Controleur c)
     {
         this.frame = frame;
+        this.c = c;
         this.setSize(500, 500);
         this.setVisible(true);
         this.setBackground(Color.red);
@@ -29,7 +32,24 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
     {
         super.paintComponent(g);
         g.setColor(Color.blue);
-        g.drawOval(this.baseX, this.baseY, this.newX, this.newY);
+
+        ArrayList<Forme> arrForme = this.c.getArrForme();
+
+        for (Forme f : arrForme){
+            if (f.getTypeForme().equals("Cercle")){
+                g.drawOval(f.getXDebut(), f.getYDebut(), f.getXFin(), f.getYFin());
+            }
+            else if (f.getTypeForme().equals("Rectangle")){
+                g.drawRect(f.getXDebut(), f.getYDebut(), f.getXFin(), f.getYFin());
+            }
+            else if (f.getTypeForme().equals("Ligne")){
+                g.drawLine(f.getXDebut(), f.getYDebut(), f.getXFin(), f.getYFin());
+            }
+        }
+
+
+        
+        //g.drawOval(this.baseX, this.baseY, this.newX, this.newY);
     }
 
 
@@ -69,6 +89,9 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
         System.out.println("Mouse released");
         this.newX = e.getX();
         this.newY = e.getY();
+
+
+        this.c.creeForme("Ligne", this.baseX, this.baseY, this.newX, this.newY, Color.BLUE, 1);
 
         this.repaint();
     }

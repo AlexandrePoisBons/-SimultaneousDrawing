@@ -8,9 +8,12 @@ class Frame extends JFrame
     public Frame(Controleur c){
         JPanel panelDessin;
         this.c = c;
-        panelDessin = new PanelDessins(this);
+        panelDessin = new PanelDessins(this,c);
         this.add(panelDessin);
         this.setSize(500, 500);
         this.setVisible(true);
     }
+
+
+
 }
