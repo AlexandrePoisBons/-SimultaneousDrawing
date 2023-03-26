@@ -11,12 +11,16 @@ public class Controleur {
     ArrayList<Forme> arrForme; 
     String typeForme;
 
+    Color couleur;
+
 
 
     public Controleur() {
         arrForme = new ArrayList<Forme>();
         ihm = new Frame(this);
         typeForme = "Ligne";
+        couleur = Color.black;
+
         
     }
 
@@ -35,6 +39,14 @@ public class Controleur {
 
     public String getTypeForme() {
         return typeForme;
+    }
+
+    public void setCouleur(Color couleur) {
+        this.couleur = couleur;
+    }
+
+    public Color getCouleur() {
+        return couleur;
     }
 
     

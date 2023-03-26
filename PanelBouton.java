@@ -1,6 +1,8 @@
+import java.awt.Color;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -42,7 +44,9 @@ public class PanelBouton extends JPanel implements ActionListener{
 
     public void actionPerformed(java.awt.event.ActionEvent e) {
         if(e.getSource() == this.boutonCouleur){
-            System.out.println("Couleur");
+            Color couleur = JColorChooser.showDialog(this, "Choisissez une couleur", Color.black);
+            if (couleur != null)
+                this.c.setCouleur(couleur);
         }
         else if(e.getSource() == this.boutonEpaisseur){
             System.out.println("Epaisseur");

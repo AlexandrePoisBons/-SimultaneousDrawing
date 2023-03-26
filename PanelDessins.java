@@ -37,11 +37,11 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g); 
-        g.setColor(Color.blue);
 
         ArrayList<Forme> arrForme = this.c.getArrForme();
 
         for (Forme f : arrForme){
+            g.setColor(f.getCouleur());
             if (f.getTypeForme().equals("Cercle")){
                 int x2 = f.getXFin() - f.getXDebut();
                 int y2 = f.getYFin() - f.getYDebut();
@@ -84,6 +84,7 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
         }
 
         if (this.isPressed){
+            g.setColor(this.c.getCouleur());
             if (this.c.getTypeForme().equals("Cercle")){
                 int x2 = this.newX - this.baseX;
                 int y2 = this.newY - this.baseY;
@@ -181,7 +182,7 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
         this.isPressed = false;
 
 
-        this.c.creeForme(this.c.getTypeForme(), this.baseX, this.baseY, this.newX, this.newY, Color.BLUE, 1);
+        this.c.creeForme(this.c.getTypeForme(), this.baseX, this.baseY, this.newX, this.newY, this.c.getCouleur(), 1);
 
         this.repaint();
     }
