@@ -18,7 +18,7 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
         this.c = c;
         this.setSize(500, 500);
         this.setVisible(true);
-        this.setBackground(Color.red);
+        this.setBackground(Color.white);
         this.addMouseListener(this);
 
         this.baseX = this.baseY = this.newX = this.newY = 0;
@@ -37,10 +37,10 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
 
         for (Forme f : arrForme){
             if (f.getTypeForme().equals("Cercle")){
-                g.drawOval(f.getXDebut(), f.getYDebut(), f.getXFin(), f.getYFin());
+                g.drawOval(f.getXDebut(), f.getYDebut(), f.getXFin()-f.getXDebut(),f.getYFin() - f.getYDebut());
             }
             else if (f.getTypeForme().equals("Rectangle")){
-                g.drawRect(f.getXDebut(), f.getYDebut(), f.getXFin(), f.getYFin());
+                g.drawRect(f.getXDebut(), f.getYDebut(), f.getXFin()-f.getXDebut(),f.getYFin() - f.getYDebut());
             }
             else if (f.getTypeForme().equals("Ligne")){
                 g.drawLine(f.getXDebut(), f.getYDebut(), f.getXFin(), f.getYFin());
@@ -77,21 +77,25 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
 
     public void mousePressed(java.awt.event.MouseEvent e)
     {
-        System.out.println("Mouse pressed");
         this.baseX = e.getX();
         this.baseY = e.getY();
+
+        System.out.println("BASE X : " + this.baseX);
+        System.out.println("BASE Y : " + this.baseY);
 
 
     }
 
     public void mouseReleased(java.awt.event.MouseEvent e)
     {
-        System.out.println("Mouse released");
         this.newX = e.getX();
         this.newY = e.getY();
 
+        System.out.println("NEW X : " + this.newX);
+        System.out.println("NEW Y : " + this.newY);
 
-        this.c.creeForme("Ligne", this.baseX, this.baseY, this.newX, this.newY, Color.BLUE, 1);
+
+        this.c.creeForme(this.c.getTypeForme(), this.baseX, this.baseY, this.newX, this.newY, Color.BLUE, 1);
 
         this.repaint();
     }

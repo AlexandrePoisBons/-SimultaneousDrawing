@@ -9,12 +9,14 @@ public class Controleur {
     JFrame ihm;
 
     ArrayList<Forme> arrForme; 
+    String typeForme;
+
+
 
     public Controleur() {
         arrForme = new ArrayList<Forme>();
         ihm = new Frame(this);
-        
-
+        typeForme = "Ligne";
         
     }
 
@@ -25,6 +27,14 @@ public class Controleur {
 
     public ArrayList<Forme> getArrForme() {
         return arrForme;
+    }
+
+    public void setTypeForme(String typeForme) {
+        this.typeForme = typeForme;
+    }
+
+    public String getTypeForme() {
+        return typeForme;
     }
 
     
