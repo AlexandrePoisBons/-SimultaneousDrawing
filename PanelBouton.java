@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -16,6 +17,8 @@ public class PanelBouton extends JPanel implements ActionListener{
     private JButton boutonEffacer;
 
     private Controleur c;
+    private JCheckBox chbRempli;
+    private JButton boutonText;
     
     
     public PanelBouton(JFrame frame, Controleur c){
@@ -26,13 +29,20 @@ public class PanelBouton extends JPanel implements ActionListener{
         this.boutonCercle = new JButton("Cercle");
         this.boutonLigne = new JButton("Ligne");
         this.boutonEffacer = new JButton("Effacer");
+        this.chbRempli = new JCheckBox("Rempli");
+        this.boutonText = new JButton("Texte");
         
-        this.add(boutonCouleur);
-        this.add(boutonEpaisseur);
+        
+        
         this.add(boutonRectangle);
         this.add(boutonCercle);
         this.add(boutonLigne);
+        this.add(boutonText);
+        this.add(chbRempli);
+        this.add(boutonCouleur);
+        this.add(boutonEpaisseur);
         this.add(boutonEffacer);
+
         
         this.boutonCouleur.addActionListener(this);
         this.boutonEpaisseur.addActionListener(this);
@@ -40,6 +50,8 @@ public class PanelBouton extends JPanel implements ActionListener{
         this.boutonCercle.addActionListener(this);
         this.boutonLigne.addActionListener(this);
         this.boutonEffacer.addActionListener(this);
+        this.chbRempli.addActionListener(this);
+        this.boutonText.addActionListener(this);
         this.setVisible(true);
     }
 
@@ -70,7 +82,16 @@ public class PanelBouton extends JPanel implements ActionListener{
             this.c.setTypeForme("Ligne");
         }
         else if(e.getSource() == this.boutonEffacer){
-            System.out.println("Effacer");
+            this.c.undo();
+        }
+        else if(e.getSource() == this.chbRempli){
+            this.c.setRempli(this.chbRempli.isSelected());
+        }
+
+        else if(e.getSource() == this.boutonText){
+            this.c.setTypeForme("Texte");
+            String texte = (String)JOptionPane.showInputDialog(this, "Message : ", "Texte", JOptionPane.PLAIN_MESSAGE, null, null, "Texte");
+            this.c.setTexte(texte);
         }
         
     }

@@ -18,7 +18,7 @@ class Frame extends JFrame
         panel.add(panelDessin, java.awt.BorderLayout.CENTER);
         this.add(panel);
 
-        this.setSize(500, 500);
+        this.setSize(750, 750);
         this.setVisible(true);
     }
 

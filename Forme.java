@@ -8,6 +8,8 @@ public class Forme {
     private int yFin;
     private Color couleur;
     private int epaisseur;
+    private boolean rempli;
+    private String text;
 
     /*
      * Constructeur de la classe Forme
@@ -19,7 +21,7 @@ public class Forme {
      * @param couleur : couleur de la forme
      * @param epaisseur : épaisseur de la forme
      */
-    public Forme(String typeForme, int xDebut, int yDebut, int xFin, int yFin, Color couleur, int epaisseur) {
+    public Forme(String typeForme, int xDebut, int yDebut, int xFin, int yFin, Color couleur, int epaisseur, boolean rempli) {
         this.typeForme = typeForme;
         this.xDebut = xDebut;
         this.yDebut = yDebut;
@@ -27,6 +29,19 @@ public class Forme {
         this.yFin = yFin;
         this.couleur = couleur;
         this.epaisseur = epaisseur;
+        this.rempli = rempli;
+        this.text = "";
+    }
+    public Forme(String typeForme, int xDebut, int yDebut, int xFin, int yFin, Color couleur, int epaisseur, boolean rempli, String text) {
+        this.typeForme = typeForme;
+        this.xDebut = xDebut;
+        this.yDebut = yDebut;
+        this.xFin = xFin;
+        this.yFin = yFin;
+        this.couleur = couleur;
+        this.epaisseur = epaisseur;
+        this.rempli = rempli;
+        this.text = text;
     }
 
     public String getTypeForme() {
@@ -37,6 +52,7 @@ public class Forme {
     public int getXDebut() {
         return xDebut;
     }
+    
 
     public int getYDebut() {
         return yDebut;
@@ -58,6 +74,13 @@ public class Forme {
         return epaisseur;
     }
 
+    public boolean getRempli() {
+        return rempli;
+    }
+
+    public String getText() {
+        return text;
+    }
 
 
     
