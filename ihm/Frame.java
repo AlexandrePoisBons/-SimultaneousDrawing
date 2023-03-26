@@ -1,7 +1,10 @@
+package ihm;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-class Frame extends JFrame
+import metier.Controleur;
+
+public class Frame extends JFrame
 
 {
     Controleur c;

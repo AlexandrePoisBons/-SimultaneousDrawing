@@ -1,5 +1,10 @@
+package ihm;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import metier.Controleur;
+import metier.Forme;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionListener;
@@ -14,12 +19,10 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
 {
 
     private int baseX, baseY , newX , newY;
-    private JFrame frame;
     private Controleur c;
     private Boolean isPressed;
     public PanelDessins(JFrame frame, Controleur c)
     {
-        this.frame = frame;
         this.c = c;
         this.isPressed = false;
         
