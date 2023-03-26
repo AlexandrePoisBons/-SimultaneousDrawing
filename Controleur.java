@@ -10,7 +10,7 @@ public class Controleur {
 
     ArrayList<Forme> arrForme; 
     String typeForme;
-
+    int epaisseur;
     Color couleur;
 
 
@@ -20,6 +20,7 @@ public class Controleur {
         ihm = new Frame(this);
         typeForme = "Ligne";
         couleur = Color.black;
+        epaisseur = 1;
 
         
     }
@@ -47,6 +48,14 @@ public class Controleur {
 
     public Color getCouleur() {
         return couleur;
+    }
+
+    public void setEpaisseur(int epaisseur) {
+        this.epaisseur = epaisseur;
+    }
+
+    public int getEpaisseur() {
+        return epaisseur;
     }
 
     

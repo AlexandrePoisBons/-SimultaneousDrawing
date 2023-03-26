@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class PanelBouton extends JPanel implements ActionListener{
@@ -49,7 +50,15 @@ public class PanelBouton extends JPanel implements ActionListener{
                 this.c.setCouleur(couleur);
         }
         else if(e.getSource() == this.boutonEpaisseur){
-            System.out.println("Epaisseur");
+            /*open a dialog to choose the thickness*/
+            String epaisseur = (String)JOptionPane.showInputDialog(this, "Choisissez une épaisseur", "Epaisseur", JOptionPane.PLAIN_MESSAGE, null, null, "1");
+            if (epaisseur != null)
+            try{
+                this.c.setEpaisseur(Integer.parseInt(epaisseur));
+            }
+            catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(this, "Veuillez entrer un nombre entier", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
         }
         else if(e.getSource() == this.boutonRectangle){
             this.c.setTypeForme("Rectangle");

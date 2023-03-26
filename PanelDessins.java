@@ -1,6 +1,7 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -38,25 +39,30 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
     {
         super.paintComponent(g); 
 
+        Graphics2D g2 = (Graphics2D) g;
+        
+        //g.setStroke(new java.awt.BasicStroke(2));
+
         ArrayList<Forme> arrForme = this.c.getArrForme();
 
         for (Forme f : arrForme){
-            g.setColor(f.getCouleur());
+            g2.setStroke(new java.awt.BasicStroke(f.getEpaisseur()));
+            g2.setColor(f.getCouleur());
             if (f.getTypeForme().equals("Cercle")){
                 int x2 = f.getXFin() - f.getXDebut();
                 int y2 = f.getYFin() - f.getYDebut();
 
                 if (x2 >0 && y2 > 0){
-                    g.drawOval(f.getXDebut(), f.getYDebut(), x2,y2);
+                    g2.drawOval(f.getXDebut(), f.getYDebut(), x2,y2);
                 }
                 else if (x2 < 0 && y2 < 0){
-                    g.drawOval(f.getXFin(), f.getYFin(), -x2,-y2);
+                    g2.drawOval(f.getXFin(), f.getYFin(), -x2,-y2);
                 }
                 else if (x2 < 0 && y2 > 0){
-                    g.drawOval(f.getXFin(), f.getYDebut(), -x2,y2);
+                    g2.drawOval(f.getXFin(), f.getYDebut(), -x2,y2);
                 }
                 else if (x2 > 0 && y2 < 0){
-                    g.drawOval(f.getXDebut(), f.getYFin(), x2,-y2);
+                    g2.drawOval(f.getXDebut(), f.getYFin(), x2,-y2);
                 }
             }
             else if (f.getTypeForme().equals("Rectangle")){
@@ -65,62 +71,64 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
                 int y2 = f.getYFin() - f.getYDebut();
 
                 if (x2 >0 && y2 > 0){
-                    g.drawRect(f.getXDebut(), f.getYDebut(), x2,y2);
+                    g2.drawRect(f.getXDebut(), f.getYDebut(), x2,y2);
                 }
                 else if (x2 < 0 && y2 < 0){
-                    g.drawRect(f.getXFin(), f.getYFin(), -x2,-y2);
+                    g2.drawRect(f.getXFin(), f.getYFin(), -x2,-y2);
                 }
                 else if (x2 < 0 && y2 > 0){
-                    g.drawRect(f.getXFin(), f.getYDebut(), -x2,y2);
+                    g2.drawRect(f.getXFin(), f.getYDebut(), -x2,y2);
                 }
                 else if (x2 > 0 && y2 < 0){
-                    g.drawRect(f.getXDebut(), f.getYFin(), x2,-y2);
+                    g2.drawRect(f.getXDebut(), f.getYFin(), x2,-y2);
                 }
 
             }
             else if (f.getTypeForme().equals("Ligne")){
-                g.drawLine(f.getXDebut(), f.getYDebut(), f.getXFin(), f.getYFin());
+                g2.drawLine(f.getXDebut(), f.getYDebut(), f.getXFin(), f.getYFin());
             }
         }
 
         if (this.isPressed){
+            g2.setStroke(new java.awt.BasicStroke(this.c.getEpaisseur()));
             g.setColor(this.c.getCouleur());
             if (this.c.getTypeForme().equals("Cercle")){
                 int x2 = this.newX - this.baseX;
                 int y2 = this.newY - this.baseY;
 
                 if (x2 >0 && y2 > 0){
-                    g.drawOval(this.baseX, this.baseY, x2,y2);
+                    g2.drawOval(this.baseX, this.baseY, x2,y2);
                 }
                 else if (x2 < 0 && y2 < 0){
-                    g.drawOval(this.newX, this.newY, -x2,-y2);
+                    g2.drawOval(this.newX, this.newY, -x2,-y2);
                 }
                 else if (x2 < 0 && y2 > 0){
-                    g.drawOval(this.newX, this.baseY, -x2,y2);
+                    g2.drawOval(this.newX, this.baseY, -x2,y2);
                 }
                 else if (x2 > 0 && y2 < 0){
-                    g.drawOval(this.baseX, this.newY, x2,-y2);
+                    g2.drawOval(this.baseX, this.newY, x2,-y2);
                 }
             }
             else if (this.c.getTypeForme().equals("Rectangle")){
                 int x2 = this.newX - this.baseX;
                 int y2 = this.newY - this.baseY;
+                
 
                 if (x2 >0 && y2 > 0){
-                    g.drawRect(this.baseX, this.baseY, x2,y2);
+                    g2.drawRect(this.baseX, this.baseY, x2,y2);
                 }
                 else if (x2 < 0 && y2 < 0){
-                    g.drawRect(this.newX, this.newY, -x2,-y2);
+                    g2.drawRect(this.newX, this.newY, -x2,-y2);
                 }
                 else if (x2 < 0 && y2 > 0){
-                    g.drawRect(this.newX, this.baseY, -x2,y2);
+                    g2.drawRect(this.newX, this.baseY, -x2,y2);
                 }
                 else if (x2 > 0 && y2 < 0){
-                    g.drawRect(this.baseX, this.newY, x2,-y2);
+                    g2.drawRect(this.baseX, this.newY, x2,-y2);
                 }
             }
             else if (this.c.getTypeForme().equals("Ligne")){
-                g.drawLine(this.baseX, this.baseY, this.newX, this.newY);
+                g2.drawLine(this.baseX, this.baseY, this.newX, this.newY);
             }
         }
 
@@ -158,7 +166,7 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
         this.baseY = e.getY();
 
         this.isPressed = true;
-
+        
 
 
 
@@ -182,7 +190,7 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
         this.isPressed = false;
 
 
-        this.c.creeForme(this.c.getTypeForme(), this.baseX, this.baseY, this.newX, this.newY, this.c.getCouleur(), 1);
+        this.c.creeForme(this.c.getTypeForme(), this.baseX, this.baseY, this.newX, this.newY, this.c.getCouleur(), this.c.getEpaisseur());
 
         this.repaint();
     }
