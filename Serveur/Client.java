@@ -29,6 +29,12 @@ public class Client
         this.clientToServerSocket.requestDrawing();
     }
 
+    public void copieClient(){
+        this.ctrl.getArrForme().clear();
+        this.clientToServerSocket.requestDrawing();
+    }
+
+
 
     public Boolean Connect(String ip, int port)
     {

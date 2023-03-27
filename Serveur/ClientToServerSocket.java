@@ -151,7 +151,8 @@ public class ClientToServerSocket extends Thread
 
                 if (command.equals("removeDrawing"))
                 {
-                    this.ctrl.enleveFormeDuServeur((String)ois.readObject());
+                    //this.ctrl.enleveFormeDuServeur((String)ois.readObject());
+                    this.ctrl.copieServeur();
                     this.ctrl.majIhm();
                 }
 

@@ -110,7 +110,7 @@ public class Controleur {
             {
                 //this.arrForme.remove(tmp);
                 //this.arrForme.clear();
-                
+
                 this.client.removeFrome(tmp);
 
                 
@@ -125,6 +125,11 @@ public class Controleur {
         }
 
         this.ihm.repaint();
+    }
+
+    public void copieServeur()
+    {
+        this.client.copieClient();
     }
 
     public void enleveFormeDuServeur(String id)
