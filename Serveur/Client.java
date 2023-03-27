@@ -44,7 +44,7 @@ public class Client
             this.clientToServerSocket.Disconnect();
         }
 
-        Boolean success = this.clientToServerSocket.Connect(ip, 31337);
+        Boolean success = this.clientToServerSocket.Connect(ip, port);
 
 
         if (success)

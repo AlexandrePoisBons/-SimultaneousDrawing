@@ -13,12 +13,12 @@ public class ServerThread extends Thread
     private ArrayList<ServerToClientSocket> serverToClientSockets;
     private Controleur ctrl;
 
-    public ServerThread(Controleur ctrl)
+    public ServerThread(Controleur ctrl,int port )
     {
         this.ctrl = ctrl;
         try
         {
-            this.serverSocket = new ServerSocket(31337);
+            this.serverSocket = new ServerSocket(port);
             this.serverToClientSockets = new ArrayList<ServerToClientSocket>();
         }
         catch (Exception e)

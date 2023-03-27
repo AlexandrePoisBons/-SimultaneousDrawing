@@ -74,11 +74,11 @@ public class Controleur {
         arrForme.add(f);
     }
 
-    public Boolean startServer()
+    public Boolean startServer(int port)
     {
         if (this.serveur == null)
         {
-            this.serveur = new ServerThread(this);
+            this.serveur = new ServerThread(this,port);
             this.serveur.start();
             return true;
         }
@@ -88,13 +88,13 @@ public class Controleur {
         }
     }
 
-    public Boolean joinServer(String ip, String port)
+    public Boolean joinServer(String port)
     {
         this.client = new Client(this);
 
         
         
-        return this.client.Connect(ip, Integer.parseInt(port));
+        return this.client.Connect("localhost", Integer.parseInt(port));
 
     }
 
