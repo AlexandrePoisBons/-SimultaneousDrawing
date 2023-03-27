@@ -24,8 +24,8 @@ public class Client
 
     public void removeFrome(Forme form)
     {
-        //this.clientToServerSocket.removeForme(form);
-        //this.ctrl.getArrForme().clear();
+        this.clientToServerSocket.removeForme(form);
+        this.ctrl.getArrForme().clear();
         this.clientToServerSocket.requestDrawing();
     }
 

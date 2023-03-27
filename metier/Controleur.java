@@ -109,7 +109,8 @@ public class Controleur {
             if (this.client != null)
             {
                 //this.arrForme.remove(tmp);
-                this.arrForme.clear();
+                //this.arrForme.clear();
+                
                 this.client.removeFrome(tmp);
 
                 
