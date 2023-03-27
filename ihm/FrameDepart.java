@@ -26,9 +26,9 @@ public class FrameDepart extends JFrame implements ActionListener  {
         this.setSize(750, 750);
         this.setVisible(true);
 
-        this.pseudo = new TextField();
-        this.ip = new TextField();
-        this.port = new TextField();
+        this.pseudo = new TextField("Pseudo");
+        this.ip = new TextField("localhost");
+        this.port = new TextField("1234");
 
         this.connexion = new JButton("Connexion");
         this.creeServeur = new JButton("Créer un serveur");
@@ -64,7 +64,10 @@ public class FrameDepart extends JFrame implements ActionListener  {
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == this.connexion){
+            System.out.println("Connexion");
             c.joinServer(this.ip.getText(), this.port.getText());
+            dispose();
+            
         }
         if(e.getSource() == this.creeServeur){
 

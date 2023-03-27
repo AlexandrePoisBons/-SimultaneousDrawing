@@ -43,10 +43,12 @@ public class ClientToServerSocket extends Thread
             this.oos = new ObjectOutputStream(socket.getOutputStream());
             this.ois = new ObjectInputStream(socket.getInputStream());
             this.running = true;
+
+            
         }
         catch (Exception e)
         {
-            System.err.println("Impossible de créer les flux d'entrée/sortie");
+            System.err.println("Echec de connection au serveur");
             e.printStackTrace();
             return false;
         }
@@ -76,7 +78,7 @@ public class ClientToServerSocket extends Thread
         try {
             this.oos.writeObject("requestDrawing");
         } catch (IOException e) {
-            System.err.println("Impossible d'envoyer la demande de dessin");
+            System.err.println("Echec a la récupération des dessins");
             e.printStackTrace();
         }
 
@@ -84,6 +86,7 @@ public class ClientToServerSocket extends Thread
 
     public void sendForme(Forme forme)
     {
+        System.out.println("Client envoie forme");
         try {
             oos.reset();
             oos.writeObject("newDrawing");
@@ -95,21 +98,10 @@ public class ClientToServerSocket extends Thread
         }
     }
 
-    public void majForme(Forme forme)
-    {
-        try {
-            oos.reset();
-            oos.writeObject("majDrawing");
-            oos.writeObject(forme);
-            oos.flush();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } 
-    }
 
     public void removeForme(Forme forme)
     {
+        System.out.println("Client suprime forme ClientToServerSocket");
         try {
             oos.reset();
             oos.writeObject("removeDrawing");
@@ -121,30 +113,7 @@ public class ClientToServerSocket extends Thread
         } 
     }
 
-    public void unRemvoeForme(Forme forme)
-    {
-        try {
-            oos.reset();
-            oos.writeObject("unRemoveDrawing");
-            oos.writeObject(forme.getId());
-            oos.flush();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } 
-    }
-
-    public void sendClear()
-    {
-        try {
-            oos.reset();
-            oos.writeObject("clear");
-            oos.flush();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void run()
@@ -180,26 +149,11 @@ public class ClientToServerSocket extends Thread
                     this.ctrl.majIhm();
                 }
 
-                // if (command.equals("majDrawing"))
-                // {
-                //     Forme forme = (Forme)ois.readObject();
-                //     this.ctrl.majForme(forme);
-                // }
-
-                // if (command.equals("removeDrawing"))
-                // {
-                //     this.ctrl.removeFormeNetwork((String)ois.readObject());
-                // }
-
-                // if (command.equals("unRemoveDrawing"))
-                // {
-                //     this.ctrl.unRemoveFormeNetwork((String)ois.readObject());
-                // }
-
-                // if (command.equals("clear"))
-                // {
-                //     this.ctrl.newDrawingAreaNetwork();
-                // }
+                if (command.equals("removeDrawing"))
+                {
+                    this.ctrl.enleveFormeDuServeur((String)ois.readObject());
+                    this.ctrl.majIhm();
+                }
 
             }
             catch (Exception e)

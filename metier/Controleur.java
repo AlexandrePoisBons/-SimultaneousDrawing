@@ -49,11 +49,28 @@ public class Controleur {
 
     public void creeForme(String typeForme, int xDebut, int yDebut, int xFin, int yFin, Color couleur, int epaisseur, boolean rempli) {
         Forme f = new Forme(typeForme, xDebut, yDebut, xFin, yFin, couleur, epaisseur, rempli);
+        if (this.client != null)
+        {
+            this.client.sendForme(f);
+        }
+        else if (this.serveur != null)
+        {
+            this.serveur.broadcastForme(f);
+        }
         arrForme.add(f);
     }
 
     public void creeForme(String typeForme, int xDebut, int yDebut, int xFin, int yFin, Color couleur, int epaisseur, boolean rempli, String text) {
         Forme f = new Forme(typeForme, xDebut, yDebut, xFin, yFin, couleur, epaisseur, rempli, text);
+
+        if (this.client != null)
+        {
+            this.client.sendForme(f);
+        }
+        else if (this.serveur != null)
+        {
+            this.serveur.broadcastForme(f);
+        }
         arrForme.add(f);
     }
 
@@ -71,24 +88,59 @@ public class Controleur {
         }
     }
 
-    public Boolean joinServer(String ip, int port)
+    public Boolean joinServer(String ip, String port)
     {
         this.client = new Client(this);
+
         
-        return this.client.Connect(ip, port);
+        
+        return this.client.Connect(ip, Integer.parseInt(port));
+
     }
 
 
-    public ArrayList<Forme> getArrForme() {
+    public synchronized ArrayList<Forme>  getArrForme() {
         return arrForme;
     }
     public void undo() {
         if (arrForme.size() > 0) {
-            arrForme.remove(arrForme.size() - 1);
+            Forme tmp = arrForme.get(arrForme.size() - 1);
+            
+            if (this.client != null)
+            {
+                //this.arrForme.remove(tmp);
+                this.arrForme.clear();
+                this.client.removeFrome(tmp);
+
+                
+
+            }
+            else if (this.serveur != null)
+            {
+                this.arrForme.remove(tmp);
+                this.serveur.broadcastRemoveForme(tmp);
+            }
+        
         }
 
         this.ihm.repaint();
     }
+
+    public void enleveFormeDuServeur(String id)
+    {
+        for (int i = 0; i < arrForme.size(); i++)
+        {
+            if (arrForme.get(i).getId().equals(id))
+            {
+    
+                arrForme.remove(i);
+                break;
+            }
+        }
+        this.majIhm();
+    }
+
+
 
     public void setTypeForme(String typeForme) {
         this.typeForme = typeForme;
@@ -136,8 +188,6 @@ public class Controleur {
         Controleur c = new Controleur();
     }
 
-    public void joinServer(String text, String text2) {
-    }
 
    
 

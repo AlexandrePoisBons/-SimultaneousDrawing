@@ -36,6 +36,7 @@ public class ServerThread extends Thread
             // Accept a new client
             try
             {
+                System.out.println("En attente d'un nouveau client");
                 Socket socket = this.serverSocket.accept();
                 ServerToClientSocket serverToClientSocket = new ServerToClientSocket(this, socket);
                 this.serverToClientSockets.add(serverToClientSocket);
@@ -57,14 +58,6 @@ public class ServerThread extends Thread
         }
     }
 
-    public void broadcastMajForme(Forme forme)
-    {
-        for (ServerToClientSocket serverToClientSocket : this.serverToClientSockets)
-        {
-            serverToClientSocket.majForme(forme);
-        }
-    }
-
     public void broadcastRemoveForme(Forme forme)
     {
         for (ServerToClientSocket serverToClientSocket : this.serverToClientSockets)
@@ -73,21 +66,6 @@ public class ServerThread extends Thread
         }
     }
 
-    public void broadcastUnRemoveForme(Forme forme)
-    {
-        for (ServerToClientSocket serverToClientSocket : this.serverToClientSockets)
-        {
-            serverToClientSocket.unRemoveForme(forme);
-        }
-    }
-
-    public void broadcastClear()
-    {
-        for (ServerToClientSocket serverToClientSocket : this.serverToClientSockets)
-        {
-            serverToClientSocket.clearDrawings();
-        }
-    }
 
     public Controleur getCtrl()
     {

@@ -7,10 +7,13 @@ public class Client
 {
     
     private ClientToServerSocket clientToServerSocket;
+    private Controleur ctrl;
 
     public Client(Controleur ctrl)
     {
-        this.clientToServerSocket = new ClientToServerSocket(ctrl);
+        this.ctrl = ctrl;
+        this.ctrl.creeIhm();
+        this.clientToServerSocket = new ClientToServerSocket(this.ctrl);
     }
 
     public void sendForme(Forme form)
@@ -18,25 +21,14 @@ public class Client
         this.clientToServerSocket.sendForme(form);
     }
 
-    public void majForme(Forme form)
-    {
-        this.clientToServerSocket.majForme(form);
-    }
 
     public void removeFrome(Forme form)
     {
-        this.clientToServerSocket.removeForme(form);
+        //this.clientToServerSocket.removeForme(form);
+        //this.ctrl.getArrForme().clear();
+        this.clientToServerSocket.requestDrawing();
     }
 
-    public void unRemoveForme(Forme form)
-    {
-        this.clientToServerSocket.unRemvoeForme(form);
-    }
-
-    public void sendClear()
-    {
-        this.clientToServerSocket.sendClear();
-    }
 
     public Boolean Connect(String ip, int port)
     {
@@ -46,11 +38,12 @@ public class Client
             this.clientToServerSocket.Disconnect();
         }
 
-        Boolean success = this.clientToServerSocket.Connect(ip, port);
+        Boolean success = this.clientToServerSocket.Connect(ip, 31337);
 
 
         if (success)
         {
+            
             this.clientToServerSocket.start();
             this.clientToServerSocket.requestDrawing();
 

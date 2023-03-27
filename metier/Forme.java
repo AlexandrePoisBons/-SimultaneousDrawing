@@ -2,7 +2,7 @@ package metier;
 import java.awt.Color;
 import java.util.UUID;
 
-public class Forme {
+public class Forme implements java.io.Serializable{
     private String typeForme;
     private int xDebut;
     private int yDebut;
@@ -89,10 +89,13 @@ public class Forme {
     }
 
     public String serialize() {
-        System.out.println(id +","+ typeForme + "," + xDebut + "," + yDebut + "," + xFin + "," + yFin + "," + couleur.getRGB() + "," + epaisseur + "," + rempli + "," + text);
+        //System.out.println(id +","+ typeForme + "," + xDebut + "," + yDebut + "," + xFin + "," + yFin + "," + couleur.getRGB() + "," + epaisseur + "," + rempli + "," + text);
         return typeForme + "," + xDebut + "," + yDebut + "," + xFin + "," + yFin + "," + couleur.getRGB() + "," + epaisseur + "," + rempli + "," + text;
     }
-
+    public String toString() {
+        //System.out.println(id +","+ typeForme + "," + xDebut + "," + yDebut + "," + xFin + "," + yFin + "," + couleur.getRGB() + "," + epaisseur + "," + rempli + "," + text);
+        return typeForme + "," + xDebut + "," + yDebut + "," + xFin + "," + yFin + "," + couleur.getRGB() + "," + epaisseur + "," + rempli + "," + text;
+    }
     public String getId() {
         return id;
     }

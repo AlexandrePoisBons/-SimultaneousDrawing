@@ -39,7 +39,7 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
 
     }
 
-    public void paintComponent(Graphics g)
+    public synchronized void paintComponent(Graphics g)
     {
         super.paintComponent(g); 
 
@@ -127,7 +127,6 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
             }
             else if (f.getTypeForme().equals("Texte")){
                 g2.setFont(new Font("Arial", Font.PLAIN, f.getYFin()-f.getYDebut() > 0 ? f.getYFin()-f.getYDebut() : f.getYDebut()-f.getYFin()));
-                System.out.println(f.getText());
                 g2.drawString(f.getText(), f.getXDebut(), f.getYDebut());
             }
             
@@ -223,24 +222,16 @@ public class PanelDessins extends JPanel implements MouseListener , ActionListen
 
 
 
-    public void actionPerformed(java.awt.event.ActionEvent e)
-    {
-        System.out.println("Action performed");
-    }
+    public void actionPerformed(java.awt.event.ActionEvent e){ }
 
-    public void mouseClicked(java.awt.event.MouseEvent e)
-    {
-        System.out.println("Mouse clicked");
-    }
+    public void mouseClicked(java.awt.event.MouseEvent e){}
 
     public void mouseEntered(java.awt.event.MouseEvent e)
     {
-        System.out.println("Mouse entered");
     }
 
     public void mouseExited(java.awt.event.MouseEvent e)
     {
-        System.out.println("Mouse exited");
     }
 
 
