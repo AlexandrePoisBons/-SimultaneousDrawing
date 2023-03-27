@@ -65,7 +65,7 @@ public class FrameDepart extends JFrame implements ActionListener  {
 
         if(e.getSource() == this.connexion){
             System.out.println("Connexion");
-            c.joinServer(this.port.getText());
+            c.joinServer(this.ip.getText(),this.port.getText());
             dispose();
             
         }

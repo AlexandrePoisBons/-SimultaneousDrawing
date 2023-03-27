@@ -88,13 +88,13 @@ public class Controleur {
         }
     }
 
-    public Boolean joinServer(String port)
+    public Boolean joinServer(String ip ,String port)
     {
         this.client = new Client(this);
 
         
         
-        return this.client.Connect("localhost", Integer.parseInt(port));
+        return this.client.Connect(ip, Integer.parseInt(port));
 
     }
 
